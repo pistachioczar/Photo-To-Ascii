@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.FileWriter;  // Import the File class
 import java.io.IOException;
+import java.awt.Desktop;
+import java.io.File;
 
 public class CreateFile {
     public static void makeFile(String fileName) {
@@ -23,5 +25,16 @@ public class CreateFile {
         } catch (IOException e) {
             System.out.println(e);
         }
+
+        try {
+            File file = new File(fileName);
+            if(Desktop.isDesktopSupported()) {
+                Desktop desktop = Desktop.getDesktop();
+                desktop.open(file);
+            }
+        } catch(IOException e) {
+            System.out.println(e);
+        }
+
     }
 }
