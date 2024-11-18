@@ -71,7 +71,11 @@ public class Main {
     try{ img = ImageIO.read(image); }
     catch (IOException e) { e.printStackTrace(System.out); }
 
-    System.out.println("How many pixels do you want each character to take up?");
+    System.out.println("""
+            Specify the pixel dimension of each character square (e.g., 2 for a 2x2 square).
+            
+            --------------------------------------------------------------------------------
+            """);
     while(true) {
       try{
         characterPerPixel = Integer.parseInt(scanner.nextLine());
@@ -83,9 +87,12 @@ public class Main {
             throw new IllegalArgumentException("Please enter a number smaller than " + img.getWidth());
           }
         }
+        if(characterPerPixel < 0) {
+          throw new IllegalArgumentException("Please enter a positive integer");
+        }
         break;
       }catch(Exception e){
-        System.out.println("Please enter an integer");
+        System.out.println(e.getMessage());
       }
     }
 
