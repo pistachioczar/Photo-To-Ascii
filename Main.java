@@ -28,7 +28,10 @@ public class Main {
       System.exit(0);
     }
 
-    System.out.println("Which image would you like to make into ascii?");
+    System.out.println("""
+            Which image would you like to make into ascii?
+            ----------------------------------------------
+            """);
     while(true) {
       for (String i: directoryContents) {
         System.out.println(i);
@@ -37,13 +40,29 @@ public class Main {
       try {
         fileChoice = scanner.nextLine();
         image = new File("media\\" + fileChoice);
-        if(image.exists() && image.isFile()) {
+        String extension = fileChoice.substring(fileChoice.lastIndexOf(".") + 1);
+
+        if(!image.exists() && !image.isFile()) {
+          System.out.println("""
+                  File not found. Please enter the file name with the extension for example:
+                  picture.png
+                  --------------------------------------------------------------------------
+                  """);
+          continue;
+        }
+        if(extension.equals("png") || extension.equals("jpg") || extension.equals("jpeg")) {
           break;
-        } else{
-          System.out.println("File not found. Please enter the file name with the extension for example:\npicture.png");
+        } else {
+          System.out.println("""
+                  Please enter an image file with one of these extensions: 'png','jpg' or,'jpeg'
+                  ------------------------------------------------------------------------------
+                  """);
         }
       } catch(Exception e) {
-        System.out.println("That is not a valid file. Please choose one listed below");
+        System.out.println("""
+                That is not a valid file. Please choose one listed below
+                --------------------------------------------------------
+                """);
       }
     }
 
@@ -66,7 +85,7 @@ public class Main {
         }
         break;
       }catch(Exception e){
-        System.out.println(e.getMessage());
+        System.out.println("Please enter an integer");
       }
     }
 
