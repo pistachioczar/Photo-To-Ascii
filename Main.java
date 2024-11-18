@@ -73,7 +73,6 @@ public class Main {
 
     System.out.println("""
             Specify the pixel dimension of each character square (e.g., 2 for a 2x2 square).
-            
             --------------------------------------------------------------------------------
             """);
     while(true) {
