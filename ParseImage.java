@@ -1,20 +1,9 @@
 import java.awt.*;
 import java.awt.image.*;
-import javax.swing.*;
 
 
 public class ParseImage {
 
-    public static void display (BufferedImage img){
-        JFrame frame = new JFrame();
-        JLabel label = new JLabel();
-        frame.setSize(img.getWidth(), img.getHeight());
-        label.setIcon(new ImageIcon(img));
-        frame.getContentPane().add(label, BorderLayout.CENTER);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
-    }
 
     public static BufferedImage grayScale(BufferedImage img) {
         BufferedImage grayImage = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_BYTE_GRAY);
@@ -25,6 +14,8 @@ public class ParseImage {
     }
 
     public static char[][] makeASCII(BufferedImage img, int pixelWidth) {
+        img = img.getSubimage(0, 0, img.getWidth() - (img.getWidth() % pixelWidth), img.getHeight() - (img.getHeight() % pixelWidth));
+
         char[][] ascii = new char[img.getHeight()/ pixelWidth][img.getWidth()/ pixelWidth];
 
 
@@ -68,5 +59,4 @@ public class ParseImage {
 
         return ascii;
     }
-
 }
